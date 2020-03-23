@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- 1. properties :属性配置  -->
+	<properties resource="db.properties">
+		<!-- <property name="jdbc.driver" value="com.mysql.jdbc.Driver"/> -->		
+	</properties>
+	
+	<!-- 2. settings: 包含很多重要的设置项，可以改变MyBatis的运行行为 -->
+	<settings>
+		<!-- 映射下划线到驼峰命名 -->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		
+		<!-- 开启延迟加载 -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!-- 设置全部加载还是按需加载 -->
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 二级缓存 -->
+		<setting name="cacheEnabled" value="true"/>
+		
+		
+	</settings>
+	<!-- 3. typeAliases: 别名处理,类型别名.  -->
+	<typeAliases>
+		<!-- 给单个类取别名， 默认别名是类名. 别名不分大小写.   
+		<typeAlias type="Employee"  alias="emp"/>
+		-->
+		
+		<!-- 为指定包下的类取默认的别名.  -->
+		<package name="cn.justweb.pojo"/>
+		
+	</typeAliases>
+	
+	<!-- 4.  environments: 环境, 可以配置多个  -->
+	<environments default="mysql">
+	
+		<environment id="mysql">
+			<!-- 
+				transactionManager： 事务管理 
+					JDBC:   JdbcTransactionFactory
+					将来:  使用Spring的声明式事务管理
+					
+			 -->
+			<transactionManager type="JDBC" />
+			<!-- 
+				dataSource: 数据源 
+					POOLED: PooledDataSourceFactory
+					将来:  使用Spring管理的连接池对象druid.
+			 -->
+			<dataSource type="POOLED">
+			
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" />
+				
+			</dataSource>
+			
+		</environment>
+		
+	</environments>
+	
+	<!-- 5. mappers   引入Mapper映射文件  -->
+	<mappers>
+		<!-- 引入单个的Mapper映射文件 
+		<mapper resource="EmployeeMapper.xml" />
+		-->
+		<!-- 将指定包下的映射文件全部引入  , 要求: Mapper接口与Mapper映射文件必须同名同位置. -->
+		<package name="cn.justweb.mapper"/>
+	</mappers>
+	
+</configuration>

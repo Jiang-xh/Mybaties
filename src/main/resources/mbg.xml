@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <!-- 
+  		targetRuntime :  生成目标. 
+  			MyBatis3Simple: 生成基本的CRUD操作. 
+  			MyBatis3:		生成带条件的CRUD操作. QBC风格.
+  
+   -->
+  <context id="DB2Tables" targetRuntime="MyBatis3Simple">
+
+
+    <!-- 使用自定义的插件 -->
+    <plugin type="cn.justweb.plugins.LombokPlugin"/>
+
+    <commentGenerator type="cn.justweb.plugins.CommentPlugin"></commentGenerator>
+
+
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://cdb-l0wj176w.bj.tencentcdb.com:10182/mybatis_day04"
+        userId="root"
+        password="Root@2011">
+    </jdbcConnection>
+
+
+
+
+
+	<!-- 
+		JavaBean生成策略
+	 -->
+    <javaModelGenerator targetPackage="cn.justweb.pojo" targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+
+	<!-- 
+		Mapper映射文件生成策略
+	 -->
+    <sqlMapGenerator targetPackage="cn.justweb.dao"  targetProject=".\src\main\resources">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+	<!-- Mapper接口的生成策略 -->
+    <javaClientGenerator type="XMLMAPPER" targetPackage="cn.justweb.dao"  targetProject=".\src\main\java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+
+
+	
+	<!-- 
+		逆向分析的表
+	 -->
+    <table tableName="department" domainObjectName="Department"> </table>
+    
+	<table tableName="employee" domainObjectName="Employee"> </table>
+  </context>
+</generatorConfiguration>
