@@ -11,7 +11,7 @@
   			MyBatis3:		生成带条件的CRUD操作. QBC风格.
   
    -->
-  <context id="DB2Tables" targetRuntime="MyBatis3Simple">
+  <context id="DB2Tables" targetRuntime="MyBatis3">
 
 
     <!-- 使用自定义的插件 -->
